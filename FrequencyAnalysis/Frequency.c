@@ -81,8 +81,8 @@ void printCharacterCount(CharacterCount characterCount[]) {
 void cleanupCharacterCount(CharacterCount **characterCount) {
     CharacterCount *newArray = malloc(nextSlot * sizeof(CharacterCount));
     for (int i = 0; i < nextSlot; i++) {
-        printf("[%c, %d]\n", newArray[i].letter, newArray[i].count);
         newArray[i] = (*characterCount)[i];
+        printf("[%c, %d]\n", newArray[i].letter, newArray[i].count);
     }
 
     free(*characterCount);
