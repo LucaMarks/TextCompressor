@@ -1,16 +1,24 @@
 #include "Frequency.h"
+#include "../Compress/CompressWord.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
-typedef struct{
-    char letter;
-    int count;
-}CharacterCount;
+// typedef struct{
+//     char letter;
+//     int count;
+// }CharacterCount;
 
 int getCharacters();
 void getRepeatingCharacters(char word[], CharacterCount characterCount[]);
 int checkRepeatingCharacter(CharacterCount characterCount[], char character);
 void printCharacterCount(CharacterCount characterCount[]);
+
+void cleanupCharacterCount(CharacterCount **characterCount);
+
+int nextSlot = 0;
+char *words[24];
+int ind = 0;
 
 int getCharacters() {
     //read the file
@@ -22,7 +30,6 @@ int getCharacters() {
         return 1;
     }
 
-    char *words[24];
 
     int count = 0;
     while (fgets(buffer, sizeof(buffer), file)) {
@@ -33,19 +40,23 @@ int getCharacters() {
         count++;
     }
 
-    for (int i = 0; i < count; i++) {
+    for (ind = 0; ind < count; ind++) {
 
-        printf("%d\n", strlen(words[i]));
+        printf("%d\n", strlen(words[ind]));
 
-        CharacterCount characterCount[strlen(words[i]) + 1];
+        CharacterCount *characterCount = malloc((strlen(words[ind]) + 1) * sizeof(CharacterCount));
         //lokey this line is optional
         memset(characterCount, 0, sizeof(characterCount));
 
-        getRepeatingCharacters(words[i], characterCount);
+        getRepeatingCharacters(words[ind], characterCount);
         printCharacterCount(characterCount);
+        printf("\n");
+        cleanupCharacterCount(&characterCount);
+        int size = nextSlot;
     }
 
     fclose(file);
+
 }
 void printCharacterCount(CharacterCount characterCount[]) {
     for (int i = 0; i < characterCount[i].letter != '\0'; i++) {
@@ -53,9 +64,35 @@ void printCharacterCount(CharacterCount characterCount[]) {
     }
 }
 
+// need to fix this with the pointers or sum
+// void cleanupCharacterCount(CharacterCount *characterCount[]) {
+//
+//     // nextSlot--;
+//     CharacterCount buffCharacterCount[nextSlot];
+//     for (int i = 0; i < nextSlot; i++) {
+//         printf("[%c, %d]\n", characterCount[i].letter, characterCount[i].count);
+//         buffCharacterCount[i] = characterCount[i];
+//     }
+//     free(characterCount);
+//     characterCount = &buffCharacterCount;
+//     // printCharacterCount(buffCharacterCount);
+// }
+
+void cleanupCharacterCount(CharacterCount **characterCount) {
+    CharacterCount *newArray = malloc(nextSlot * sizeof(CharacterCount));
+    for (int i = 0; i < nextSlot; i++) {
+        printf("[%c, %d]\n", newArray[i].letter, newArray[i].count);
+        newArray[i] = (*characterCount)[i];
+    }
+
+    free(*characterCount);
+    //new array is a pointer
+    *characterCount = newArray;
+}
+
 void getRepeatingCharacters(char word[], CharacterCount characterCount[]) {
 
-    int nextSlot = 0;
+    nextSlot = 0;
     for (int i = 0; i < strlen(word); i++) {
         int repeatedCharacter = checkRepeatingCharacter(characterCount, word[i]);
         if (repeatedCharacter > -1) {

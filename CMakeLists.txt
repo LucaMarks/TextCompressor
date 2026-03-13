@@ -7,4 +7,6 @@ add_executable(TextCompressor main.c
         FrequencyAnalysis/Frequency.c
         FrequencyAnalysis/Frequency.h
         DynamicArray/DynamicCharacterCount.c
-        DynamicArray/DynamicCharacterCount.h)
+        DynamicArray/DynamicCharacterCount.h
+        Compress/CompressWord.c
+        Compress/CompressWord.h)

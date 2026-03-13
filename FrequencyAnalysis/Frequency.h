@@ -5,6 +5,11 @@
 #ifndef TEXTCOMPRESSOR_FREQUENCY_H
 #define TEXTCOMPRESSOR_FREQUENCY_H
 
+typedef struct {
+    char letter;
+    int count;
+}CharacterCount;
+// int size;
 int getCharacters();
 
 #endif
