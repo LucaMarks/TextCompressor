@@ -4,20 +4,24 @@
 #include <stdlib.h>
 
 void insertionSort(CharacterCount **list, int size);
+void assignBits(CharacterCount *characterCounts);
+int size;
 
-void convertToBytes(char word[], CharacterCount *characterCount, int size) {
+void convertToBytes(char word[], CharacterCount *characterCount, int size_) {
+    size = size_;
     for (int i = 0; i < size; i++) {
         printf("[%c, %d]\n", characterCount[i].letter, characterCount[i].count);
     }
 
     printf("\n");
     //sort the list
-    insertionSort(&characterCount, size);
+    insertionSort(&characterCount, size_);
 
     for (int i = 0; i < size; i++) {
         printf("[%c, %d]\n", characterCount[i].letter, characterCount[i].count);
     }
 }
+
 void insertionSort(CharacterCount **list, int size) {
     CharacterCount *temp = *list;
     int i, j;
@@ -33,3 +37,8 @@ void insertionSort(CharacterCount **list, int size) {
 }
 
 
+void assignBits(CharacterCount *characterCounts) {
+    for (int i = 0; i < size; i++) {
+                        
+    }
+}

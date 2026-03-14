@@ -9,6 +9,11 @@ typedef struct {
     char letter;
     int count;
 }CharacterCount;
+typedef struct {
+    char letter;
+    int code;
+}CharacterCode;
+
 // int size;
 int getCharacters();
 

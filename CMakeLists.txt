@@ -9,4 +9,4 @@ add_executable(TextCompressor main.c
         DynamicArray/DynamicCharacterCount.c
         DynamicArray/DynamicCharacterCount.h
         Compress/CompressWord.c
-        Compress/CompressWord.h)
+)
