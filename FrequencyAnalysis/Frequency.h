@@ -12,4 +12,5 @@ typedef struct {
 // int size;
 int getCharacters();
 
+void convertToBytes(char word[], CharacterCount *characterCount, int size);
 #endif

@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 
-void convertToBytes(char word[], CharacterCount characterCount[]) {
-
+void convertToBytes(char word[], CharacterCount *characterCount, int size) {
+    // for (int i = 0; i < size)
 }
 

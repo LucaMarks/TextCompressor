@@ -12,13 +12,14 @@
 int getCharacters();
 void getRepeatingCharacters(char word[], CharacterCount characterCount[]);
 int checkRepeatingCharacter(CharacterCount characterCount[], char character);
-void printCharacterCount(CharacterCount characterCount[]);
+void printCharacterCount(CharacterCount *characterCount);
 
 void cleanupCharacterCount(CharacterCount **characterCount);
 
 int nextSlot = 0;
 char *words[24];
 int ind = 0;
+int size = 0;
 
 int getCharacters() {
     //read the file
@@ -52,13 +53,14 @@ int getCharacters() {
         printCharacterCount(characterCount);
         printf("\n");
         cleanupCharacterCount(&characterCount);
-        int size = nextSlot;
+        size = nextSlot;
+        convertToBytes(words[ind], characterCount, size);
     }
 
     fclose(file);
 
 }
-void printCharacterCount(CharacterCount characterCount[]) {
+void printCharacterCount(CharacterCount *characterCount) {
     for (int i = 0; i < characterCount[i].letter != '\0'; i++) {
         printf("[%c, %d]\n", characterCount[i].letter, characterCount[i].count);
     }
@@ -77,7 +79,6 @@ void printCharacterCount(CharacterCount characterCount[]) {
 //     characterCount = &buffCharacterCount;
 //     // printCharacterCount(buffCharacterCount);
 // }
-
 void cleanupCharacterCount(CharacterCount **characterCount) {
     CharacterCount *newArray = malloc(nextSlot * sizeof(CharacterCount));
     for (int i = 0; i < nextSlot; i++) {
