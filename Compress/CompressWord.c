@@ -1,32 +1,32 @@
-#include "CompressWord.h"
-#include "../FrequencyAnalysis/Frequency.h"
+#include "../mainHeader.h"
 #include <stdio.h>
 #include <stdlib.h>
 
-void insertionSort(CharacterCount **list, int size);
+void insertionSort(CharacterCount **list);
 void assignBits(CharacterCount *characterCounts);
-int size;
+int wordSize;
 
-void convertToBytes(char word[], CharacterCount *characterCount, int size_) {
-    size = size_;
-    for (int i = 0; i < size; i++) {
+void convertToBytes(char word[], CharacterCount *characterCount, int wordSize) {
+    wordSize = wordSize;
+    for (int i = 0; i < wordSize; i++) {
         printf("[%c, %d]\n", characterCount[i].letter, characterCount[i].count);
     }
 
     printf("\n");
     //sort the list
-    insertionSort(&characterCount, size_);
+    insertionSort(&characterCount);
 
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < wordSize; i++) {
         printf("[%c, %d]\n", characterCount[i].letter, characterCount[i].count);
     }
+    treeRunner(characterCount, word, wordSize);
 }
 
-void insertionSort(CharacterCount **list, int size) {
+void insertionSort(CharacterCount **list) {
     CharacterCount *temp = *list;
     int i, j;
     CharacterCount key;
-    for (i = 1; i < size; i++) {
+    for (i = 1; i < wordSize; i++) {
         key = temp[i];
         for (j = i - 1; j >= 0 && temp[j].count > key.count; j--) {
             temp[j + 1] = temp[j];
@@ -35,10 +35,6 @@ void insertionSort(CharacterCount **list, int size) {
     }
     *list = temp;
 }
+//will come back to this, need to to encoding first
 
 
-void assignBits(CharacterCount *characterCounts) {
-    for (int i = 0; i < size; i++) {
-                        
-    }
-}
