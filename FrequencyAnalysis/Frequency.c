@@ -49,10 +49,12 @@ int getCharacters() {
         memset(characterCount, 0, sizeof(characterCount));
 
         getRepeatingCharacters(words[ind], characterCount);
+        printf("\n");
         printCharacterCount(characterCount);
         printf("\n");
         cleanupCharacterCount(&characterCount);
         size = nextSlot;
+        printf("Frequency Analysis Finished\n");
         convertToBytes(words[ind], characterCount, size);
     }
 
@@ -60,7 +62,7 @@ int getCharacters() {
 
 }
 void printCharacterCount(CharacterCount *characterCount) {
-    for (int i = 0; i < characterCount[i].letter != '\0'; i++) {
+    for (int i = 0; i < nextSlot; i++) {
         printf("[%c, %d]\n", characterCount[i].letter, characterCount[i].count);
     }
 }
@@ -102,16 +104,18 @@ void getRepeatingCharacters(char word[], CharacterCount characterCount[]) {
             // printf("adding %c\n", word[i]);
             characterCount[nextSlot].letter = word[i];
             characterCount[nextSlot].count = 1;
+
             nextSlot ++;
             // printCharacterCount(characterCount);
             // printf("\n");
         }
     }
-    characterCount[nextSlot].letter = '\0';
+    // nextSlot--;
+    // characterCount[nextSlot].letter = '\0';
 }
 int checkRepeatingCharacter(CharacterCount characterCount[], char character) {
     printf("Checking for %c ->", character);
-    for (int i =0; i < characterCount[i].letter != '\0'; i++) {
+    for (int i = 0; i < nextSlot; i++) {
         // printf("    %c\n", characterCount[i].letter);
         if (characterCount[i].letter == character) {
             printf(" %c already exists\n", character);
