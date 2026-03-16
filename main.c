@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "FrequencyAnalysis/Frequency.h"
+#include "mainHeader.h"
 
 int main(void) {
 

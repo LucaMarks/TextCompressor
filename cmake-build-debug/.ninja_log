@@ -1,0 +1,23 @@
+# ninja log v6
+2	411	7951718067472614	build.ninja	81db8e9f4bb92c06
+2	411	7951718067442621	C:/Users/lucst/Documents/CProjects/TextCompressor/cmake-build-debug/cmake_install.cmake	81db8e9f4bb92c06
+29	170	7951712741613575	CMakeFiles/TextCompressor.dir/Encoding/Tree.c.obj	d638e501fcf77dce
+44	147	7951697328476782	CMakeFiles/TextCompressor.dir/DynamicArray/DynamicCharacterCount.c.obj	525beeb8b8e1c33b
+4	131	7951712741373605	CMakeFiles/TextCompressor.dir/main.c.obj	7b2c887a94b4b961
+3	138	7951712822148313	CMakeFiles/TextCompressor.dir/Compress/CompressWord.c.obj	2caef7f24e38c282
+139	252	7951712823494397	TextCompressor.exe	a2e7872823b4432c
+17	150	7951712741502250	CMakeFiles/TextCompressor.dir/FrequencyAnalysis/Frequency.c.obj	fccd42f0733cdc74
+4	150	7951732220677593	CMakeFiles/TextCompressor.dir/main.c.obj	7b2c887a94b4b961
+23	151	7951732220860565	CMakeFiles/TextCompressor.dir/Compress/CompressWord.c.obj	2caef7f24e38c282
+28	152	7951732220918604	CMakeFiles/TextCompressor.dir/Encoding/Tree.c.obj	d638e501fcf77dce
+17	164	7951732220810014	CMakeFiles/TextCompressor.dir/FrequencyAnalysis/Frequency.c.obj	fccd42f0733cdc74
+3	129	7951733128086984	CMakeFiles/TextCompressor.dir/Encoding/Encode.c.obj	6e85fd4a96b43340
+129	259	7951733129346891	TextCompressor.exe	14effbaaa0076945
+4	131	7951734235636805	CMakeFiles/TextCompressor.dir/Encoding/Encode.c.obj	6e85fd4a96b43340
+132	240	7951734236909991	TextCompressor.exe	14effbaaa0076945
+4	136	7951734441332775	CMakeFiles/TextCompressor.dir/Encoding/Encode.c.obj	6e85fd4a96b43340
+137	246	7951734442659276	TextCompressor.exe	14effbaaa0076945
+3	137	7951734975721228	CMakeFiles/TextCompressor.dir/Encoding/Encode.c.obj	6e85fd4a96b43340
+138	248	7951734977065015	TextCompressor.exe	14effbaaa0076945
+3	134	7951735363910076	CMakeFiles/TextCompressor.dir/Encoding/Encode.c.obj	6e85fd4a96b43340
+134	243	7951735365224513	TextCompressor.exe	14effbaaa0076945

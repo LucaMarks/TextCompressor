@@ -5,8 +5,11 @@ set(CMAKE_C_STANDARD 23)
 
 add_executable(TextCompressor main.c
         FrequencyAnalysis/Frequency.c
-        FrequencyAnalysis/Frequency.h
+        mainHeader.h
         DynamicArray/DynamicCharacterCount.c
         DynamicArray/DynamicCharacterCount.h
         Compress/CompressWord.c
+        Encoding/Tree.c
+        Encoding/Encode.c
+        Encoding/Tree.h
 )

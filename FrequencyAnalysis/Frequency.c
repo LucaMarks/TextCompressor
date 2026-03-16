@@ -1,5 +1,4 @@
-#include "Frequency.h"
-#include "../Compress/CompressWord.h"
+#include "../mainHeader.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -105,7 +104,7 @@ void getRepeatingCharacters(char word[], CharacterCount characterCount[]) {
             characterCount[nextSlot].count = 1;
             nextSlot ++;
             // printCharacterCount(characterCount);
-            printf("\n");
+            // printf("\n");
         }
     }
     characterCount[nextSlot].letter = '\0';
@@ -113,6 +112,7 @@ void getRepeatingCharacters(char word[], CharacterCount characterCount[]) {
 int checkRepeatingCharacter(CharacterCount characterCount[], char character) {
     printf("Checking for %c ->", character);
     for (int i =0; i < characterCount[i].letter != '\0'; i++) {
+        // printf("    %c\n", characterCount[i].letter);
         if (characterCount[i].letter == character) {
             printf(" %c already exists\n", character);
             return i;

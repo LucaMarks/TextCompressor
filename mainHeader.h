@@ -17,5 +17,6 @@ typedef struct {
 // int size;
 int getCharacters();
 
+void treeRunner(CharacterCount *characterCount, char word[], int size);
 void convertToBytes(char word[], CharacterCount *characterCount, int size);
 #endif
