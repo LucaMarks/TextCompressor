@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/lucst/Documents/CProjects/TextCompressor/cmake-build-debug",
-		"source" : "C:/Users/lucst/Documents/CProjects/TextCompressor"
+		"build" : "C:/Users/lucst/Documents/C Projects/TextCompressor/cmake-build-debug",
+		"source" : "C:/Users/lucst/Documents/C Projects/TextCompressor"
 	},
 	"version" : 
 	{
