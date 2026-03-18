@@ -6,13 +6,13 @@ void insertionSort(CharacterCount **list);
 void assignBits(CharacterCount *characterCounts);
 int wordSize;
 
-void convertToBytes(char word[], CharacterCount *characterCount, int wordSize) {
-    wordSize = wordSize;
+void convertToBytes(char word[], CharacterCount *characterCount, int wordSize_) {
+    wordSize = wordSize_;
     for (int i = 0; i < wordSize; i++) {
         printf("[%c, %d]\n", characterCount[i].letter, characterCount[i].count);
     }
 
-    printf("\n");
+    printf("sort the list below\n");
     //sort the list
     insertionSort(&characterCount);
 
@@ -33,7 +33,6 @@ void insertionSort(CharacterCount **list) {
         }
         temp[j+1] = key;
     }
-    *list = temp;
 }
 //will come back to this, need to to encoding first
 

@@ -21,11 +21,6 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Program Files/JetBrains/CLion 2025.2.4/bin/cmake/win/x64/share/cmake-4.0/Modules/CMakeMinGWFindMake.cmake"
-		},
-		{
-			"isCMake" : true,
-			"isExternal" : true,
 			"path" : "C:/Program Files/JetBrains/CLion 2025.2.4/bin/cmake/win/x64/share/cmake-4.0/Modules/CMakeSystemSpecificInitialize.cmake"
 		},
 		{
@@ -509,8 +504,8 @@
 	"kind" : "cmakeFiles",
 	"paths" : 
 	{
-		"build" : "C:/Users/lucst/Documents/C Projects/TextCompressor/cmake-build-debug",
-		"source" : "C:/Users/lucst/Documents/C Projects/TextCompressor"
+		"build" : "C:/Users/lucst/Documents/CProjects/TextCompressor/cmake-build-debug",
+		"source" : "C:/Users/lucst/Documents/CProjects/TextCompressor"
 	},
 	"version" : 
 	{

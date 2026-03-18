@@ -7,7 +7,7 @@ treeNode *createNode(CharacterCount value) {
     if (result != NULL) {
         result -> left = NULL;
         result -> right = NULL;
-        result -> cc = value;
+        result->cc = value;
     }
     return result;
 }
