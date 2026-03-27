@@ -2,19 +2,33 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-treeNode *createNode(CharacterCount value) {
-    treeNode *result = malloc(sizeof(treeNode));
+TreeNode *createLeafNode(CharacterCount value) {
+    // printf("creating leaf node...\n");
+    TreeNode *result = malloc(sizeof(TreeNode));
     if (result != NULL) {
         result -> left = NULL;
         result -> right = NULL;
-        result->cc = value;
+        result->isLeaf = true;
+        result->letter = value.letter;
+        result->level = value.count;
+    }
+    return result;
+}
+TreeNode *createNode(int level) {
+    // printf("Creating node...\n");
+    TreeNode *result = malloc(sizeof(TreeNode));
+    if (result != NULL) {
+        result -> left = NULL;
+        result -> right = NULL;
+        result->isLeaf = false;
+        result->level = level;
     }
     return result;
 }
 
-void setLeft(treeNode *node, treeNode *value) {
+void setLeft(TreeNode *node, TreeNode *value) {
     node->left = value;
 }
-void setRight(treeNode *node, treeNode *value) {
+void setRight(TreeNode *node, TreeNode *value) {
     node->right = value;
 }
