@@ -7,7 +7,7 @@ void makeTree(CharacterCount *characterCount, char word[], int size);
 TreeNode *getLeafNodes(CharacterCount *characterCount, int size);
 void cleanUpArray(TreeNode **nodes, int size);
 void printNodes(TreeNode *nodes, int size);
-void connectToHead(TreeNode *nodes, int *size);
+void connectToHead(TreeNode **nodes, int **size_);
 
 void treeRunner(CharacterCount *characterCount, char word[], int size) {
     printf("\n");
@@ -38,32 +38,35 @@ void makeTree(CharacterCount *characterCount, char word[], int size) {
     cleanUpArray(&nodes, nodeSize);
     //print nodes has a runtime error
     printNodes(nodes, nodeSize);
-    connectToHead(nodes, &nodeSize);
+    int *nodeSizep = &nodeSize;
+    connectToHead(&nodes, &nodeSizep);
+    nodeSize = *nodeSizep;
+    printf("Head node -> %d\n", nodes[0].level);
+    // printf("size -> %d", nodeSize);
 }
-void connectToHead(TreeNode *nodes, int *size) {
+void connectToHead(TreeNode **nodes, int **size_) {
+    int *size = *size_;
     // printf("curr size %d\n", size);
     //do the same thing as before
     TreeNode *nextLevelNodes = malloc(*size * sizeof(TreeNode));
     int nodeSize = 0;
     for (int i = 0; i < *size; i+=2) {
-        printf("%d + %d\n", nodes[i].level, nodes[i+1].level);
-        TreeNode *node = createNode(nodes[i].level + nodes[i+1].level);
+        printf("%d + %d\n", (*nodes[i]).level, (*nodes[i+1]).level);
+        TreeNode *node = createNode((*nodes[i]).level + (*nodes[i+1]).level);
         nextLevelNodes[i] = *node;
         printf("%d val->%d\n", i, nextLevelNodes[i].level);
 
-        printf("%d, [%c %d] <- [%c %d] -> [%c %d]\n", i, nextLevelNodes[i].left.(&letter), nextLevelNodes[i].left->level, 'z', nextLevelNodes[i].level, nextLevelNodes[i].right->letter, nextLevelNodes[i].right->level);
+        // printf("%d, [%c %d] <- [%c %d] -> [%c %d]\n", i, nextLevelNodes[i].left.(&letter), nextLevelNodes[i].left->level, 'z', nextLevelNodes[i].level, nextLevelNodes[i].right->letter, nextLevelNodes[i].right->level);
         nodeSize++;
     }
     cleanUpArray(&nextLevelNodes, nodeSize);
     //this is for the word mississippi only. Need to refactor this and makeTree() in order to support other words
     //not every word will end at this # of iterations
-    TreeNode **headNode = &nodes;
-    int **newSize = &size;
-    free(*headNode);
-    free(*newSize);
-    *headNode = nextLevelNodes;
-    *newSize = &nodeSize;
-
+    // TreeNode **headNode = &nodes;
+    free(*nodes);
+    *nodes = nextLevelNodes;
+    // free(*size_);
+    *size_ = &nodeSize;
 
 }
 TreeNode *getLeafNodes(CharacterCount *characterCount, int size) {
