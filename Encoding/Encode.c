@@ -7,7 +7,7 @@ void makeTree(CharacterCount *characterCount, char word[], int size);
 TreeNode *getLeafNodes(CharacterCount *characterCount, int size);
 void cleanUpArray(TreeNode **nodes, int size);
 void printNodes(TreeNode *nodes, int size);
-void connectToHead(TreeNode *nodes, int size);
+void connectToHead(TreeNode *nodes, int *size);
 
 void treeRunner(CharacterCount *characterCount, char word[], int size) {
     printf("\n");
@@ -38,20 +38,34 @@ void makeTree(CharacterCount *characterCount, char word[], int size) {
     cleanUpArray(&nodes, nodeSize);
     //print nodes has a runtime error
     printNodes(nodes, nodeSize);
-    connectToHead(nodes, nodeSize);
+    connectToHead(nodes, &nodeSize);
 }
-// void connectToHead(TreeNode *nodes, int size) {
-//     //do the same thing as before
-//     TreeNode *nextLevelNodes = malloc(size * sizeof(TreeNode));
-//     int nodeSize = 0;
-//     for (int i = 0; i < size; i+=2) {
-//         TreeNode *node = createNode(nodes[i].level + nodes[i+1].level);
-//         nextLevelNodes[i] = *node;
-//         printf("")
-//         nodeSize++;
-//     }
-// }
+void connectToHead(TreeNode *nodes, int *size) {
+    // printf("curr size %d\n", size);
+    //do the same thing as before
+    TreeNode *nextLevelNodes = malloc(*size * sizeof(TreeNode));
+    int nodeSize = 0;
+    for (int i = 0; i < *size; i+=2) {
+        printf("%d + %d\n", nodes[i].level, nodes[i+1].level);
+        TreeNode *node = createNode(nodes[i].level + nodes[i+1].level);
+        nextLevelNodes[i] = *node;
+        printf("%d val->%d\n", i, nextLevelNodes[i].level);
 
+        printf("%d, [%c %d] <- [%c %d] -> [%c %d]\n", i, nextLevelNodes[i].left.(&letter), nextLevelNodes[i].left->level, 'z', nextLevelNodes[i].level, nextLevelNodes[i].right->letter, nextLevelNodes[i].right->level);
+        nodeSize++;
+    }
+    cleanUpArray(&nextLevelNodes, nodeSize);
+    //this is for the word mississippi only. Need to refactor this and makeTree() in order to support other words
+    //not every word will end at this # of iterations
+    TreeNode **headNode = &nodes;
+    int **newSize = &size;
+    free(*headNode);
+    free(*newSize);
+    *headNode = nextLevelNodes;
+    *newSize = &nodeSize;
+
+
+}
 TreeNode *getLeafNodes(CharacterCount *characterCount, int size) {
     TreeNode *nodes = malloc(size * sizeof(TreeNode));
     for (int i = 0; i < size; i++) {
