@@ -4,7 +4,7 @@
 		"generator" : 
 		{
 			"multiConfig" : false,
-			"name" : "Ninja"
+			"name" : "MinGW Makefiles"
 		},
 		"paths" : 
 		{
@@ -35,7 +35,11 @@
 			}
 		},
 		{
+<<<<<<<< HEAD:cmake-build-debug/.cmake/api/v1/reply/index-2026-03-28T06-35-24-0583.json
 			"jsonFile" : "cache-v2-1e8295eae120a1b89965.json",
+========
+			"jsonFile" : "cache-v2-6165f4c38f22bd9fb53d.json",
+>>>>>>>> main:cmake-build-debug/.cmake/api/v1/reply/index-2026-03-28T06-34-01-0067.json
 			"kind" : "cache",
 			"version" : 
 			{
@@ -44,7 +48,11 @@
 			}
 		},
 		{
+<<<<<<<< HEAD:cmake-build-debug/.cmake/api/v1/reply/index-2026-03-28T06-35-24-0583.json
 			"jsonFile" : "cmakeFiles-v1-da24bfde86136dc18c13.json",
+========
+			"jsonFile" : "cmakeFiles-v1-ced663051a50c6fd10d6.json",
+>>>>>>>> main:cmake-build-debug/.cmake/api/v1/reply/index-2026-03-28T06-34-01-0067.json
 			"kind" : "cmakeFiles",
 			"version" : 
 			{
@@ -66,7 +74,11 @@
 	{
 		"cache-v2" : 
 		{
+<<<<<<<< HEAD:cmake-build-debug/.cmake/api/v1/reply/index-2026-03-28T06-35-24-0583.json
 			"jsonFile" : "cache-v2-1e8295eae120a1b89965.json",
+========
+			"jsonFile" : "cache-v2-6165f4c38f22bd9fb53d.json",
+>>>>>>>> main:cmake-build-debug/.cmake/api/v1/reply/index-2026-03-28T06-34-01-0067.json
 			"kind" : "cache",
 			"version" : 
 			{
@@ -76,7 +88,11 @@
 		},
 		"cmakeFiles-v1" : 
 		{
+<<<<<<<< HEAD:cmake-build-debug/.cmake/api/v1/reply/index-2026-03-28T06-35-24-0583.json
 			"jsonFile" : "cmakeFiles-v1-da24bfde86136dc18c13.json",
+========
+			"jsonFile" : "cmakeFiles-v1-ced663051a50c6fd10d6.json",
+>>>>>>>> main:cmake-build-debug/.cmake/api/v1/reply/index-2026-03-28T06-34-01-0067.json
 			"kind" : "cmakeFiles",
 			"version" : 
 			{

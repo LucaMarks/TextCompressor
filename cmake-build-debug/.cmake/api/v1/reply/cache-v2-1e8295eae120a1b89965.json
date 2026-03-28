@@ -394,38 +394,6 @@
 			"value" : ""
 		},
 		{
-			"name" : "CMAKE_EXPORT_BUILD_DATABASE",
-			"properties" : 
-			[
-				{
-					"name" : "ADVANCED",
-					"value" : "1"
-				},
-				{
-					"name" : "HELPSTRING",
-					"value" : "Enable/Disable output of build database during the build."
-				}
-			],
-			"type" : "BOOL",
-			"value" : ""
-		},
-		{
-			"name" : "CMAKE_EXPORT_COMPILE_COMMANDS",
-			"properties" : 
-			[
-				{
-					"name" : "ADVANCED",
-					"value" : "1"
-				},
-				{
-					"name" : "HELPSTRING",
-					"value" : "Enable/Disable output of compile commands during generation."
-				}
-			],
-			"type" : "BOOL",
-			"value" : ""
-		},
-		{
 			"name" : "CMAKE_EXTRA_GENERATOR",
 			"properties" : 
 			[
@@ -459,7 +427,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "Ninja"
+			"value" : "MinGW Makefiles"
 		},
 		{
 			"name" : "CMAKE_GENERATOR_INSTANCE",
@@ -566,12 +534,20 @@
 			"properties" : 
 			[
 				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
 					"name" : "HELPSTRING",
 					"value" : "make program"
 				}
 			],
 			"type" : "FILEPATH",
+<<<<<<<< HEAD:cmake-build-debug/.cmake/api/v1/reply/cache-v2-1e8295eae120a1b89965.json
 			"value" : "C:/PROGRA~1/JetBrains/CLion 2025.2.4/bin/ninja/win/x64/ninja.exe"
+========
+			"value" : "C:/PROGRA~1/JetBrains/CLion 2025.2.4/bin/mingw/bin/mingw32-make.exe"
+>>>>>>>> main:cmake-build-debug/.cmake/api/v1/reply/cache-v2-6165f4c38f22bd9fb53d.json
 		},
 		{
 			"name" : "CMAKE_MODULE_LINKER_FLAGS",
