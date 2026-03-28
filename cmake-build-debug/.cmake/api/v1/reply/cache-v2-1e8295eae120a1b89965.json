@@ -543,7 +543,11 @@
 				}
 			],
 			"type" : "FILEPATH",
+<<<<<<<< HEAD:cmake-build-debug/.cmake/api/v1/reply/cache-v2-1e8295eae120a1b89965.json
+			"value" : "C:/PROGRA~1/JetBrains/CLion 2025.2.4/bin/ninja/win/x64/ninja.exe"
+========
 			"value" : "C:/PROGRA~1/JetBrains/CLion 2025.2.4/bin/mingw/bin/mingw32-make.exe"
+>>>>>>>> main:cmake-build-debug/.cmake/api/v1/reply/cache-v2-6165f4c38f22bd9fb53d.json
 		},
 		{
 			"name" : "CMAKE_MODULE_LINKER_FLAGS",
