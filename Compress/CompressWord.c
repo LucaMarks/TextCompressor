@@ -19,7 +19,7 @@ void convertToBytes(char word[], CharacterCount *characterCount, int wordSize_) 
     for (int i = 0; i < wordSize; i++) {
         printf("[%c, %d]\n", characterCount[i].letter, characterCount[i].count);
     }
-    treeRunner(characterCount, word, wordSize);
+    encodeRunner(characterCount, word, wordSize);
 }
 
 void insertionSort(CharacterCount **list) {

@@ -3,20 +3,24 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void makeTree(CharacterCount *characterCount, char word[], int size);
+void makeTree(CharacterCount *characterCount, int size);
 TreeNode *getLeafNodes(CharacterCount *characterCount, int size);
 void cleanUpArray(TreeNode **nodes, int size);
 void printNodes(TreeNode *nodes, int size);
 void connectToHead(TreeNode **nodes, int **size_);
 
-void treeRunner(CharacterCount *characterCount, char word[], int size) {
+void assignValues(TreeNode *headNode, int size);
+
+void encodeRunner(CharacterCount *characterCount, char word[], int size) {
     printf("\n");
-    makeTree(characterCount, word, size);
+    makeTree(characterCount, size);
+    TreeNode *head = malloc(sizeof(TreeNode));
+    assignValues(&head, size);
 }
 
 //build huffman tree
 //every item in characterCount is a leaf node
-void makeTree(CharacterCount *characterCount, char word[], int size) {
+void makeTree(TreeNode **head, CharacterCount *characterCount, int size) {
     // printf("Size is %d", size);
     TreeNode *leafs = getLeafNodes(characterCount, size);
     //add up all leaf nodes in this order
@@ -34,7 +38,7 @@ void makeTree(CharacterCount *characterCount, char word[], int size) {
         // i++;
         nodeSize++;
     }
-    //issue with cleanUpArray
+
     cleanUpArray(&nodes, nodeSize);
     //print nodes has a runtime error
     printNodes(nodes, nodeSize);
@@ -43,6 +47,8 @@ void makeTree(CharacterCount *characterCount, char word[], int size) {
     nodeSize = *nodeSizep;
     printf("Head node -> %d\n", nodes[0].level);
     // printf("size -> %d", nodeSize);
+    free(*head);
+    *head = &nodes[0];
 }
 void connectToHead(TreeNode **nodes, int **size_) {
     int *size = *size_;
@@ -94,5 +100,27 @@ void cleanUpArray(TreeNode **nodes, int size) {
 void printNodes(TreeNode *nodes, int size) {
     for (int i = 0; i < size; i++) {
         printf("%d, [%c %d] <- [%c %d] -> [%c %d]\n", i, nodes[i].left->letter, nodes[i].left->level, 'z', nodes[i].level, nodes[i].right->letter, nodes[i].right->level);
+    }
+}
+
+
+void assignValues(TreeNode *headNode, int size){
+    CharacterCode *characterCodes = malloc(size * sizeof(CharacterCode));
+    int currIndex = 0;
+    char currCode[4];
+    int currCodeLen = 0;
+    TreeNode *nextNode = headNode;
+    while (nextNode->isLeaf == false) {
+        if (nextNode->left->isLeaf) {
+            // characterCodes[currIndex] = malloc(sizeof(CharacterCode));
+            CharacterCode newCode;
+            newCode.letter = nextNode->left->letter;
+            newCode.code = currCode;
+            characterCodes[currIndex] = newCode;
+            currIndex++;
+        }
+        else {
+            currCode[currCodeLen] = '0';currCodeLen++;
+        }
     }
 }

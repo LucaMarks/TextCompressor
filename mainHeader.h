@@ -9,14 +9,14 @@ typedef struct {
     char letter;
     int count;
 }CharacterCount;
-typedef struct {
+typedef struct CharacterCode{
     char letter;
-    int code;
+    char *code;
 }CharacterCode;
 
 // int size;
 int getCharacters();
 
-void treeRunner(CharacterCount *characterCount, char word[], int size);
+void encodeRunner(CharacterCount *characterCount, char word[], int size);
 void convertToBytes(char word[], CharacterCount *characterCount, int size);
 #endif
