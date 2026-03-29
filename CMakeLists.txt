@@ -1,0 +1,15 @@
+cmake_minimum_required(VERSION 4.0)
+project(TextCompressorConfig C)
+
+set(CMAKE_C_STANDARD 11)
+
+add_executable(TextCompressorConfig main.c
+        FrequencyAnalysis/Frequency.c
+        mainHeader.h
+        DynamicArray/DynamicCharacterCount.c
+        DynamicArray/DynamicCharacterCount.h
+        Compress/CompressWord.c
+        Encoding/Tree.c
+        Encoding/Encode.c
+        Encoding/Tree.h
+)
