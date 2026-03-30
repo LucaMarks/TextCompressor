@@ -18,7 +18,8 @@ void encodeRunner(CharacterCount *characterCount, char word[], int size) {
     TreeNode *head = malloc(sizeof(TreeNode));
     makeTree(&head, characterCount, size);
     printf("Head nodee -> %d\n", (*head).level);
-    // printf("first node on right -> %d", (*head).left->level);
+    // printf("first node on right -> %d\n", (*head).right->level);
+    // printf("first node on right bool -> %d\n", head->right->isLeaf);
     characterCodes = malloc(sizeof(CharacterCode) * size);
     assignValues(head, -1, "", 0);
 }
@@ -33,7 +34,7 @@ void makeTree(TreeNode **head, CharacterCount *characterCount, int size) {
     int nodeSize = 0;
     // printf("leaf node -> [%c %d]\n", leafs[0].letter, leafs[0].level);
     for (int i = 0; i < size; i+=2) {
-        // printf("leaf node -> [%c %d]\n", leafs[i].letter, leafs[i].level);
+        // printf("%d + %d ", leafs[i].level, leafs[i+1].level);
         TreeNode *node = createNode(leafs[i].level + leafs[i+1].level);
         node->isLeaf = false;
         setRight(node, &leafs[i]);
@@ -46,7 +47,7 @@ void makeTree(TreeNode **head, CharacterCount *characterCount, int size) {
         // i++;
         nodeSize++;
     }
-
+    printf("\n");
     cleanUpArray(&nodes, nodeSize);
     //print nodes has a runtime error
     printNodes(nodes, nodeSize);
@@ -71,6 +72,7 @@ void connectToHead(TreeNode **nodes, int **size_) {
         //check that right node has a right child
         // printf("right node right child check -> %d\n", nodes[i]->right->level); //this passes
         TreeNode *node = createNode((*nodes[i]).level + (*nodes[i+1]).level);
+        node->isLeaf = false;
         setRight(node, nodes[i]);
         setLeft(node, nodes[i+1]);
         // node->right = (nodes[i]);
@@ -92,7 +94,7 @@ void connectToHead(TreeNode **nodes, int **size_) {
     *nodes = nextLevelNodes;
     // printf("I'm right here!\n");
     // printf("size should be 1 %d\n", nodeSize-1);
-    printf("first node on right -> %d, size should be 1 -> %d\n", nextLevelNodes[0].right->level, nodeSize);
+    // printf("first node on right -> %d, size should be 1 -> %d\n", nextLevelNodes[0].right->level, nodeSize);
     // free(*size_);
     *size_ = &nodeSize;
 
@@ -136,6 +138,10 @@ void assignValues(TreeNode *nextNode, int currDir, char path[], int pathIndex) {
     if (currDir == 1) {
         //base case
         printf("second level -> %d\n", nextNode->left->level);
+        printf("bool -> %d\n", nextNode->right->isLeaf);
+        // if (!nextNode->isLeaf) {
+        //     printf("%d is not a leaf\n", nextNode->level);
+        // }
         if (nextNode->right->isLeaf) {
             CharacterCode newCode;
             newCode.letter = nextNode->right->letter;
