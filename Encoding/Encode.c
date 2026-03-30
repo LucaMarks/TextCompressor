@@ -33,13 +33,15 @@ void makeTree(TreeNode **head, CharacterCount *characterCount, int size) {
     int nodeSize = 0;
     // printf("leaf node -> [%c %d]\n", leafs[0].letter, leafs[0].level);
     for (int i = 0; i < size; i+=2) {
-        // printf("Made it here %d\n", i);
         // printf("leaf node -> [%c %d]\n", leafs[i].letter, leafs[i].level);
         TreeNode *node = createNode(leafs[i].level + leafs[i+1].level);
         node->isLeaf = false;
         setRight(node, &leafs[i]);
         setLeft(node, &leafs[i+1]);
         nodes[nodeSize] = *node;
+        // if (nodes[nodeSize].level == 11) {
+        //     printf("this is the head node\n");
+        // }
         // printf("working node -> [%d]\n", nodes[i].level);
         // i++;
         nodeSize++;
@@ -52,10 +54,11 @@ void makeTree(TreeNode **head, CharacterCount *characterCount, int size) {
     connectToHead(&nodes, &nodeSizep);
     nodeSize = *nodeSizep;
     // printf("size -> %d", nodeSize);
-
+    //there is only 1 item in nodes[] at this point due to connectToHead
+    // printf("Head node from array -> %d\n", nodes[nodeSize-1].level);
+    // printf("first node on right -> %d", nodes[nodeSize-1].left->level);
     free(*head);
-    *head = &nodes[0];
-    // printf("Head node -> %d\n", head->level);
+    *head = &nodes[nodeSize-1];
 }
 void connectToHead(TreeNode **nodes, int **size_) {
     int *size = *size_;
@@ -65,7 +68,16 @@ void connectToHead(TreeNode **nodes, int **size_) {
     int nodeSize = 0;
     for (int i = 0; i < *size; i+=2) {
         printf("%d + %d\n", (*nodes[i]).level, (*nodes[i+1]).level);
+        //check that right node has a right child
+        // printf("right node right child check -> %d\n", nodes[i]->right->level); //this passes
         TreeNode *node = createNode((*nodes[i]).level + (*nodes[i+1]).level);
+        setRight(node, nodes[i]);
+        setLeft(node, nodes[i+1]);
+        // node->right = (nodes[i]);
+        // node->left = (nodes[i+1]);
+
+        // printf("right of head level -> %d\n", nodes[i]->level);
+        // printf("Check node right of head -> %d\n", node->right->level);
         nextLevelNodes[i] = *node;
         printf("%d val->%d\n", i, nextLevelNodes[i].level);
 
@@ -78,6 +90,9 @@ void connectToHead(TreeNode **nodes, int **size_) {
     // TreeNode **headNode = &nodes;
     free(*nodes);
     *nodes = nextLevelNodes;
+    // printf("I'm right here!\n");
+    // printf("size should be 1 %d\n", nodeSize-1);
+    printf("first node on right -> %d, size should be 1 -> %d\n", nextLevelNodes[0].right->level, nodeSize);
     // free(*size_);
     *size_ = &nodeSize;
 
@@ -120,7 +135,7 @@ void assignValues(TreeNode *nextNode, int currDir, char path[], int pathIndex) {
     }
     if (currDir == 1) {
         //base case
-        // printf("second level -> %d\n", nextNode->left->level);
+        printf("second level -> %d\n", nextNode->left->level);
         if (nextNode->right->isLeaf) {
             CharacterCode newCode;
             newCode.letter = nextNode->right->letter;

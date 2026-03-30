@@ -31,4 +31,8 @@ void setLeft(TreeNode *node, TreeNode *value) {
 }
 void setRight(TreeNode *node, TreeNode *value) {
     node->right = value;
+    // printf("%d\n", (*value).level);
+    // if (value->level == 3) {
+    //     printf("right from head set correctly!\n");
+    // }
 }
