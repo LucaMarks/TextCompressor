@@ -69,6 +69,7 @@ void connectToHead(TreeNode **nodes, int **size_) {
     int nodeSize = 0;
     for (int i = 0; i < *size; i+=2) {
         printf("%d + %d\n", (*nodes[i]).level, (*nodes[i+1]).level);
+        // printf("%d & %d\n", (*nodes[i]).isLeaf, (*nodes[i+1]).isLeaf);
         //check that right node has a right child
         // printf("right node right child check -> %d\n", nodes[i]->right->level); //this passes
         TreeNode *node = createNode((*nodes[i]).level + (*nodes[i+1]).level);
@@ -77,7 +78,7 @@ void connectToHead(TreeNode **nodes, int **size_) {
         setLeft(node, nodes[i+1]);
         // node->right = (nodes[i]);
         // node->left = (nodes[i+1]);
-
+        // printf("%d & %d\n", node->right->isLeaf, node->left->isLeaf);
         // printf("right of head level -> %d\n", nodes[i]->level);
         // printf("Check node right of head -> %d\n", node->right->level);
         nextLevelNodes[i] = *node;
@@ -87,6 +88,7 @@ void connectToHead(TreeNode **nodes, int **size_) {
         nodeSize++;
     }
     cleanUpArray(&nextLevelNodes, nodeSize);
+    printf("%d & %d\n", nextLevelNodes[0].right->isLeaf, nextLevelNodes[0].left->isLeaf);
     //this is for the word mississippi only. Need to refactor this and makeTree() in order to support other words
     //not every word will end at this # of iterations
     // TreeNode **headNode = &nodes;
@@ -94,6 +96,8 @@ void connectToHead(TreeNode **nodes, int **size_) {
     *nodes = nextLevelNodes;
     // printf("I'm right here!\n");
     // printf("size should be 1 %d\n", nodeSize-1);
+    // nodes[0]->right->isLeaf = false; // this is a temp fix
+    // printf("%d & %d\n", nodes[0]->right->isLeaf, nodes[0]->left->isLeaf);
     // printf("first node on right -> %d, size should be 1 -> %d\n", nextLevelNodes[0].right->level, nodeSize);
     // free(*size_);
     *size_ = &nodeSize;
@@ -137,8 +141,8 @@ void assignValues(TreeNode *nextNode, int currDir, char path[], int pathIndex) {
     }
     if (currDir == 1) {
         //base case
-        printf("second level -> %d\n", nextNode->left->level);
-        printf("bool -> %d\n", nextNode->right->isLeaf);
+        // printf("second level -> %d\n", nextNode->left->level);
+        // printf("bool -> %d\n", nextNode->right->isLeaf);
         // if (!nextNode->isLeaf) {
         //     printf("%d is not a leaf\n", nextNode->level);
         // }
