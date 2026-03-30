@@ -1,5 +1,5 @@
 # ninja log v6
-4	335	7964811614972150	build.ninja	81db8e9f4bb92c06
+4	335	7964812456175526	build.ninja	81db8e9f4bb92c06
 28	143	7963829246170020	CMakeFiles/TextCompressor.dir/Encoding/Tree.c.obj	d638e501fcf77dce
 4	335	7963829245630009	C:/Users/lucst/Documents/CProjects/TextCompressor/cmake-build-debug/cmake_install.cmake	81db8e9f4bb92c06
 18	119	7963829246080029	CMakeFiles/TextCompressor.dir/DynamicArray/DynamicCharacterCount.c.obj	525beeb8b8e1c33b
