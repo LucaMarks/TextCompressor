@@ -74,7 +74,7 @@ void connectToHead(TreeNode **nodes, int **size_) {
         // printf("right node right child check -> %d\n", nodes[i]->right->level); //this passes
         TreeNode *node = createNode((*nodes[i]).level + (*nodes[i+1]).level);
         node->isLeaf = false;
-        setRight(node, nodes[i]);
+        setRight(node, nodes[i]);// i think this is causing the issue
         setLeft(node, nodes[i+1]);
         // node->right = (nodes[i]);
         // node->left = (nodes[i+1]);
