@@ -28,8 +28,9 @@ void makeTree(TreeNode **head, CharacterCount *characterCount, int size) {
 
     for (int i = 0; i < size; i+=2) {
         TreeNode *node = createNode(leafs[i].level + leafs[i+1].level);
-        node->left = &leafs[i];
+
         node->right = &leafs[i+1];
+        node->left = &leafs[i];
 
         nodes[nodeSize] = *node;
         nodeSize++;
@@ -38,7 +39,7 @@ void makeTree(TreeNode **head, CharacterCount *characterCount, int size) {
     if (nodeSize == 2) {
         connectToHead(&nodes);
 
-        free(*head);
+        // free(*head);
         //should be just one node
         *head = nodes;
     }
@@ -53,13 +54,17 @@ TreeNode *getLeafNodes(CharacterCount *characterCount, int size) {
     }
     return nodes;
 }
-void connectToHead(TreeNode**nodes) {
+void connectToHead(TreeNode **nodes) {
 
     TreeNode *head = createNode((*nodes)[0].level + (*nodes)[1].level);
+    // head->right = createNode(nodes[0]->level);
+    // head->left = createNode(nodes[1]->level);
+
     head->right = &(*nodes)[0];
     head->left = &(*nodes)[1];
+    // printf("%d\n", head->right->level);
 
-    free(*nodes);
+    // free(*nodes);
     *nodes = head;
 }
 
