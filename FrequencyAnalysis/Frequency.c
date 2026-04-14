@@ -39,10 +39,12 @@ int getCharacters() {
         int size = getRepeatingCharacters(words[i], &characterCount);
         cleanUpCharacterCount(&characterCount, size);
 
+        convertToBytes(words[i], characterCount, size);
     }
 
 
     fclose(file);
+
 }
 void cleanUpCharacterCount(CharacterCount **characterCount, int size) {
     CharacterCount *buff = malloc(size * sizeof(CharacterCount));

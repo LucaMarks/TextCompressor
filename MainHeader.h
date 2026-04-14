@@ -12,4 +12,6 @@ typedef struct CharacterCode {
 
 int getCharacters();
 
+void encodeRunner(CharacterCount *characterCount, char word[], int size);
+void convertToBytes(char word[], CharacterCount *characterCount, int wordSize_);
 #endif //TEXTCOMPRESSOR_MAINHEADER_H
