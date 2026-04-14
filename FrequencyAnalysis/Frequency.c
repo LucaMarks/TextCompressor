@@ -32,14 +32,21 @@ int getCharacters() {
         printf("%d\n", strlen(words[i]));
 
 
-        CharacterCount *characterCount = malloc(strlen(words[i]) +1 * sizeof(CharacterCount));
+        CharacterCount *characterCount = malloc((strlen(words[i]) +1) * sizeof(CharacterCount));
 
         memset(characterCount, 0, sizeof(CharacterCount));
 
         int size = getRepeatingCharacters(words[i], &characterCount);
+
         cleanUpCharacterCount(&characterCount, size);
+        //clean up characterCount
+        // printf("here\n");
+        // CharacterCount *temp = realloc(characterCount, size * sizeof(CharacterCount));
+        // characterCount = temp;
 
         convertToBytes(words[i], characterCount, size);
+
+        free(characterCount);
     }
 
 
@@ -47,7 +54,11 @@ int getCharacters() {
 
 }
 void cleanUpCharacterCount(CharacterCount **characterCount, int size) {
+
+    printf("size -> %d (clenaUpCharacterCount)\n", size);
+    // printf("%p\n", (void*)characterCount);
     CharacterCount *buff = malloc(size * sizeof(CharacterCount));
+
 
     for (int i = 0; i < size; i++) {
         buff[i] = (*characterCount)[i];
@@ -62,17 +73,23 @@ void cleanUpCharacterCount(CharacterCount **characterCount, int size) {
 int getRepeatingCharacters(char *word, CharacterCount **characterCount) {
     int index = 0;
 
+    // for (int i = 0; i < strlen(word); i++) {printf("%c\n", word[i]);}
+
     for (int i = 0; i < strlen(word); i++) {
         int repeatedCharacter = checkRepeatedCharacter(*characterCount, index, word[i]);
+        // printf("running here\n");
 
         if (repeatedCharacter > -1) {
-            //letter has alreay been accounted for
-            characterCount[repeatedCharacter]->count++;
+
+            // printf("adding existing letter %c\n", word[i]);
+            //letter has already been accounted for
+            (*characterCount)[repeatedCharacter].count++;
         }
         else {
             //letter has not already been accounted for & we need to create a new characterCount object
-            characterCount[index]->letter = word[i];
-            characterCount[index]->count = 1;
+            // printf("adding new letter...%c\n", word[i]);
+            (*characterCount)[index].letter = word[i];
+            (*characterCount)[index].count = 1;
 
             index++;
         }
@@ -80,6 +97,7 @@ int getRepeatingCharacters(char *word, CharacterCount **characterCount) {
     return index;
 }
 int checkRepeatedCharacter(CharacterCount *characterCount, int size, char character) {
+    printf("Checking letter %c(checkRepatedCharacter)\n", character);
 
     for (int i = 0; i < size; i++) {
         if (characterCount[i].letter == character) {

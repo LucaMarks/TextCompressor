@@ -26,9 +26,9 @@ TreeNode *createNode(int level) {
     return node;
 }
 
-void setLeft(TreeNode *node, TreeNode *value) {
-    node->left = value;
-}
-void setRight(TreeNode *node, TreeNode *value) {
-    node->right = value;
-}
+// void setLeft(TreeNode *node, TreeNode *value) {
+//     node->left = value;
+// }
+// void setRight(TreeNode *node, TreeNode *value) {
+//     node->right = value;
+// }
