@@ -6,13 +6,16 @@
 void makeTree(TreeNode **head, CharacterCount *characterCount, int size);
 TreeNode *getLeafNodes(CharacterCount *characterCount, int size);
 void cleanUpArray(TreeNode **nodes, int size);
+void connectToHead(TreeNode **nodes);
 
 
 void encodeRunner(CharacterCount *characterCount, char word[], int size) {
     // printf("Made it here!\n");
     TreeNode *head = malloc(sizeof(TreeNode));
     makeTree(&head, characterCount, size);
-
+    //debug
+    // printf("%d\n", head->level);
+    printf("[%d] <- [%d] -> [%d]\n", head->left->level, head->level, head->right->level);
 
 }
 
@@ -33,7 +36,11 @@ void makeTree(TreeNode **head, CharacterCount *characterCount, int size) {
 
     }
     if (nodeSize == 2) {
-        connectToHead
+        connectToHead(&nodes);
+
+        free(*head);
+        //should be just one node
+        *head = nodes;
     }
 }
 TreeNode *getLeafNodes(CharacterCount *characterCount, int size) {
@@ -45,6 +52,15 @@ TreeNode *getLeafNodes(CharacterCount *characterCount, int size) {
         // printf("leaf node -> [%c %d]\n", nodes[i].letter, nodes[i].level);
     }
     return nodes;
+}
+void connectToHead(TreeNode**nodes) {
+
+    TreeNode *head = createNode((*nodes)[0].level + (*nodes)[1].level);
+    head->right = &(*nodes)[0];
+    head->left = &(*nodes)[1];
+
+    free(*nodes);
+    *nodes = head;
 }
 
 void cleanUpArray(TreeNode **nodes, int size) {
