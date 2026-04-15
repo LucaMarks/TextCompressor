@@ -42,8 +42,8 @@ void makeTree(TreeNode **head, CharacterCount *characterCount, int size) {
     for (int i = 0; i < size; i+=2) {
         TreeNode *node = createNode(leafs[i].level + leafs[i+1].level);
 
-        node->right = &leafs[i+1];
-        node->left = &leafs[i];
+        node->right = &leafs[i];
+        node->left = &leafs[i+1];
 
         nodes[nodeSize] = *node;
         nodeSize++;
@@ -62,7 +62,7 @@ TreeNode *getLeafNodes(CharacterCount *characterCount, int size) {
     for (int i = 0; i < size; i++) {
         // printf("leaf node ->[%c %d]\n", characterCount[i].letter, characterCount[i].count);
         nodes[i] = *createLeafNode(characterCount[i]);
-        nodes[i].isLeaf = true;
+        // nodes[i].isLeaf = true;
         // printf("leaf node -> [%c %d]\n", nodes[i].letter, nodes[i].level);
     }
     return nodes;
