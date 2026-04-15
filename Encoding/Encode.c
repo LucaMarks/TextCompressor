@@ -130,10 +130,15 @@ void assignValues(TreeNode *currNode, int currDir, char *path, int pathIndex, ch
         // char *temp = realloc(path, pathIndex * sizeof(char));
         // char *temp = realloc(path, 2);
         //save path
-        char *savedPath = malloc(sizeof(char) * pathIndex);
+        path[pathIndex] = '\0';
+        char *savedPath = malloc(pathIndex+1);
         // path = temp;
-        printf("currPath: %s(Encode assignValues)\n", path);
-        savedPath = path;
+        // printf("currPath: %s(Encode assignValues)\n", path);
+        for (int i = 0; i < pathIndex; i++) {
+            savedPath[i] = path[i];
+        }
+        savedPath[pathIndex] = '\0';
+        // *savedPath = path;
 
         // printf("%c, %c\n", path[0], path[1]);
 
