@@ -22,6 +22,7 @@ void convertToBytes(char word[], CharacterCount *characterCount, int wordSize_) 
     }
 
     encodeRunner(characterCount, word, wordSize);
+
 }
 
 

@@ -7,16 +7,29 @@ void makeTree(TreeNode **head, CharacterCount *characterCount, int size);
 TreeNode *getLeafNodes(CharacterCount *characterCount, int size);
 void cleanUpArray(TreeNode **nodes, int size);
 void connectToHead(TreeNode **nodes);
+void assignValues(TreeNode *currNode, int currDir, char *path, int pathIndex, char *word);
+CharacterCode *characterCodes;
+int ccIndex = 0;
 
 
 void encodeRunner(CharacterCount *characterCount, char word[], int size) {
+    int leafNodes = sizeof(*characterCount) / sizeof(CharacterCount);
+    characterCodes = malloc( ((2 * leafNodes) - 1) * sizeof(CharacterCode));
     // printf("Made it here!\n");
     TreeNode *head = malloc(sizeof(TreeNode));
     makeTree(&head, characterCount, size);
     //debug
     // printf("%d\n", head->level);
     printf("[%d] <- [%d] -> [%d]\n", head->left->level, head->level, head->right->level);
+    char *path = malloc(size * sizeof(char));
+    assignValues(head, -1, path, 0, word);
+    for (int i = 0; i < ccIndex; i++) {
+        printf("[%s %c]\n", characterCodes[i].code, characterCodes[i].letter);
+    }
 
+    free(path);
+    free(characterCodes);
+    free(head);
 }
 
 void makeTree(TreeNode **head, CharacterCount *characterCount, int size) {
@@ -78,4 +91,66 @@ void cleanUpArray(TreeNode **nodes, int size) {
     }
     free(*nodes);
     *nodes = newNodes;
+}
+
+void assignValues(TreeNode *currNode, int currDir, char *path, int pathIndex, char *word) {
+    if (sizeof(*currNode) != sizeof(TreeNode)) {return;}
+
+
+    if (currDir == -1) {
+        assignValues(currNode, 0, path, pathIndex, word);
+        assignValues(currNode, 1, path, pathIndex, word);
+        return;
+    }
+
+
+    //read right
+    if (currDir == 0) {
+
+        // printf("Made it here!\n");
+        path[pathIndex] = '1';pathIndex++;
+
+        currNode = currNode->right;
+    }
+
+    //read left
+    if (currDir == 1) {
+        path[pathIndex] = '0';pathIndex++;
+        currNode = currNode->left;
+
+
+    }
+
+    //base case
+    if (currNode->isLeaf) {
+        //path is lokey all malloced in the same place
+        //therefore what's just going to be stored is the last path *char to end up here
+
+        //clean up
+        // char *temp = realloc(path, pathIndex * sizeof(char));
+        // char *temp = realloc(path, 2);
+        //save path
+        char *savedPath = malloc(sizeof(char) * pathIndex);
+        // path = temp;
+        printf("currPath: %s(Encode assignValues)\n", path);
+        savedPath = path;
+
+        // printf("%c, %c\n", path[0], path[1]);
+
+        //create a new characterCode
+        CharacterCode *characterCode = malloc(sizeof(CharacterCode));
+        characterCode->letter = currNode->letter;
+        characterCode->code = savedPath;
+
+        characterCodes[ccIndex] = *characterCode; ccIndex++;
+
+
+        return;
+    }
+
+
+    printf("[%c %d] <- [%c %d] -> [%c %d]\n", currNode->left->letter, currNode->left->level, currNode->letter, currNode->level, currNode->right->letter, currNode->right->level);
+
+    assignValues(currNode, 0, path, pathIndex, word);
+    assignValues(currNode, 1, path, pathIndex, word);
 }
