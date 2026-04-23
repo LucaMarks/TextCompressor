@@ -11,6 +11,12 @@ void assignValues(TreeNode *currNode, int currDir, char *path, int pathIndex, ch
 CharacterCode *characterCodes;
 int ccIndex = 0;
 
+CharacterCode **getCharacterCodes() {
+    return &characterCodes;
+}
+int *getCharacterCodeLen() {
+    return &ccIndex;
+}
 
 void encodeRunner(CharacterCount *characterCount, char word[], int size) {
     int leafNodes = sizeof(*characterCount) / sizeof(CharacterCount);
@@ -23,12 +29,13 @@ void encodeRunner(CharacterCount *characterCount, char word[], int size) {
     printf("[%d] <- [%d] -> [%d]\n", head->left->level, head->level, head->right->level);
     char *path = malloc(size * sizeof(char));
     assignValues(head, -1, path, 0, word);
-    for (int i = 0; i < ccIndex; i++) {
-        printf("[%s %c]\n", characterCodes[i].code, characterCodes[i].letter);
-    }
+
+    // for (int i = 0; i < ccIndex; i++) {
+    //     printf("[%s %c]\n", characterCodes[i].code, characterCodes[i].letter);
+    // }
 
     free(path);
-    free(characterCodes);
+    // free(characterCodes);
     free(head);
 }
 
