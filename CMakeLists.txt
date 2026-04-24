@@ -9,4 +9,5 @@ add_executable(TextCompressor main.c
         Compress/CompressWord.c
         Encoding/Tree.c
         Encoding/Tree.h
-        Encoding/Encode.c)
+        Encoding/Encode.c
+        Decoding/Decode.c)

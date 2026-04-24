@@ -44,6 +44,10 @@ void convertToBytes(char word[], CharacterCount *characterCount, int wordSize_) 
     }
 
     fclose(file);
+
+    decodeRunner(characterCodes_, ccIndex_);
+    free(characterCodes_);
+
 }
 
 

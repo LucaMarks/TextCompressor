@@ -17,4 +17,6 @@ int *getCharacterCodeLen();
 
 void encodeRunner(CharacterCount *characterCount, char word[], int size);
 void convertToBytes(char word[], CharacterCount *characterCount, int wordSize_);
+
+void decodeRunner(CharacterCode *characterCodes, int ccIndex);
 #endif //TEXTCOMPRESSOR_MAINHEADER_H
