@@ -1,5 +1,5 @@
 #include "../MainHeader.h"
-#include "Tree.h"
+#include "../Tree.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -18,7 +18,7 @@ int *getCharacterCodeLen() {
     return &ccIndex;
 }
 
-void encodeRunner(CharacterCount *characterCount, char word[], int size) {
+TreeNode *encodeRunner(CharacterCount *characterCount, char word[], int size) {
     int leafNodes = sizeof(*characterCount) / sizeof(CharacterCount);
     characterCodes = malloc( ((2 * leafNodes) - 1) * sizeof(CharacterCode));
     // printf("Made it here!\n");
@@ -36,7 +36,8 @@ void encodeRunner(CharacterCount *characterCount, char word[], int size) {
 
     free(path);
     // free(characterCodes);
-    free(head);
+    // free(head);
+    return head;
 }
 
 void makeTree(TreeNode **head, CharacterCount *characterCount, int size) {

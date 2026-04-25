@@ -1,16 +1,7 @@
 #ifndef TEXTCOMPRESSOR_TREE_H
 #define TEXTCOMPRESSOR_TREE_H
 
-#include "../MainHeader.h"
-
-typedef struct TreeNode {
-
-    bool isLeaf;
-    char letter;
-    int level;
-    struct TreeNode *left;
-    struct TreeNode *right;
-}TreeNode;
+#include "MainHeader.h"
 
 TreeNode *createLeafNode(CharacterCount value);
 TreeNode *createNode(int level);

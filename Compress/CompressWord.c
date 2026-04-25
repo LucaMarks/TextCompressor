@@ -27,7 +27,7 @@ void convertToBytes(char word[], CharacterCount *characterCount, int wordSize_) 
         printf("[%c, %d]\n", characterCount[i].letter, characterCount[i].count);
     }
 
-    encodeRunner(characterCount, word, wordSize);
+    TreeNode *headNode = encodeRunner(characterCount, word, wordSize);
     characterCodes_ = *getCharacterCodes();
     ccIndex_ = *getCharacterCodeLen();
 
@@ -52,12 +52,15 @@ void convertToBytes(char word[], CharacterCount *characterCount, int wordSize_) 
         Convert to bytes
         pad the end
      */
+
     pad();
 
-    decodeRunner(characterCodes_, ccIndex_);
+    // printf("This runs!");
+
+    // free(characterCodes_);
+    decodeRunner(headNode);
 
 
-    free(characterCodes_);
 
 }
 

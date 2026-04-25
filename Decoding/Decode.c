@@ -3,85 +3,65 @@
 #include <stdlib.h>
 #include <string.h>
 
-char **wordList;
-char *getLetter(char *code, CharacterCode *characterCodes, int ccIndex);
+void decodeRunner(TreeNode *headNode);
+char *convertLine(TreeNode *headNode, char *line);
 
-void decodeRunner(CharacterCode *characterCodes, int ccIndex) {
-    //open file
-    FILE *file = fopen("../compressedText.txt", "r");
-    char buffer[255];
+void decodeRunner(TreeNode *headNode) {
+    // printf("This runs!\n");
 
-    if (file == NULL) {
-        printf("FILE IS EQUAL TO NULL!!!\n");
-        return;
+    FILE *file = fopen("../CompressedText.txt", "r");
+    FILE *decompressed = fopen("../DecompressedText.txt", "w");
+
+    char buff[255];
+    while (fgets(buff, sizeof(buff), file) != NULL) {
+        // printf("strlen _> %d", strlen(buff));
+        char *convertedLine = convertLine(headNode, buff);
+        // printf("%s\n", convertedLine);
+        fprintf(decompressed, "%s", convertedLine);
     }
-
-    //25 words allocated
-        //->dummy #
-    wordList = malloc(25);
-    *wordList = malloc(25);
-
-    int lineCount = 0;
-    while(fgets(buffer, sizeof(buffer), file) != NULL) {
-        // printf("Made it here!");
-        wordList[lineCount] = malloc(strlen(buffer) + 1);
-        wordList[lineCount] = buffer;
-        lineCount++;
-    }
-    //need to loop through each char to get this right
-    //otherwise we will have issues since lineCount var is 1 for this demo
-    //this will only run once for demo
-    //count represents how many characters we have per line
-    //  -> this will need to be refactored after demo
-    int count = 0;
-    for(int i = 0; i < lineCount; i++){
-        for (int j = 0; j < strlen(wordList[i]); j++) {
-            count++;
-        }
-    }
-
-
-    //will also need to make a new characterCount array
-    char **codes;
-    int currCodeIndex = 0;
-    //change these later
-    //storing 26 words (codes)
-    codes = malloc(26 * sizeof(char));
-    *codes = malloc(2 * sizeof(char));
-    // *codes = &malloc(2 * sizeof(char));
-
-    //assume every character code has the same # of bits
-    int codeSize = sizeof(*(characterCodes[0].code));
-    // printf("%d\n", codeSize);
-    printf("%d\n", count);
-    //temp
-    int currLineCount = 0;
-    for (int i = 0; i < count-1; i+=codeSize+1) {
-        printf("%d, [%c, %c]\n", i, wordList[currLineCount][i], wordList[currLineCount][i+1]);
-        codes[currCodeIndex][0] = wordList[currLineCount][i];
-        codes[currCodeIndex][1] = wordList[currLineCount][i+1];
-        currCodeIndex++;
-
-    }
-    //would probably be a good idea to free xtra space in codes pointer
-    for (int i = 0; i < currCodeIndex; i++) {
-
-        char *letter = (getLetter(codes[currCodeIndex], characterCodes, ccIndex));
-
-        printf("%c\n", *letter);
-        free(letter);
-    }
+    fclose(file);
+    fclose(decompressed);
 }
 
-char *getLetter(char *code, CharacterCode *characterCodes, int ccIndex) {
+char *convertLine(TreeNode *headNode, char *line) {
+    char *sentence = malloc(255 * sizeof(char));
+    int sentenceIndex = 0;
 
-    for (int i = 0; i < ccIndex; i++) {
+    TreeNode *currNode = headNode;
 
-        if (characterCodes[i].code == code) {
-            char *letter = malloc(sizeof(char));
-            *letter = characterCodes[i].letter;
-            return letter;
-        }
+    // printf("strlen -> %d", strlen((line)));
+    for (int i = 0; i < strlen(line); i++) {
+        // printf("this Runs!\n");
+        if (line != NULL) {
+            // printf("%c", line[i]);
+            if (currNode->isLeaf) {
+                sentence[sentenceIndex] = currNode->letter;sentenceIndex++;
+                printf("Letter %c found!\n", sentence[sentenceIndex-1]);
+                currNode = headNode;
+                }
+            if (line[i] == '0') {currNode = currNode->left;}
+            if (line[i] == '1') {currNode = currNode->right;}
+
+        }else{printf("Error! line index %d is null for given line (Decode.c 10)\n");return NULL;}
     }
-    return NULL;
+    // printf("%d\n", strlen(sentence));
+    sentence[sentenceIndex] = '\0';
+    char *sentenceBuff = realloc(sentence, strlen(sentence) + 1);
+    // //clean up sentence
+    // //realocate
+    // char *sentenceBuff = malloc((sentenceIndex) * sizeof(char));
+    //this is always going to be problematic since sentenceIndex = 14 for mississippi when it should be 11
+    // for (int i = 0; i < sentenceIndex; i++) {
+    //
+    // // printf("This works!\n");
+    //     // printf("%c", sentence[i]);
+    //     sentenceBuff[i] = sentence[i];
+    // }
+    // sentence[sentenceIndex] = '\0';
+    // printf("%s\n", sentenceBuff);
+    // free(sentence);
+    // // free(sentenceBuff);
+    //
+    // // printf("%s\n", sentence);
+    return sentenceBuff;
 }

@@ -8,6 +8,6 @@ add_executable(TextCompressor main.c
         FrequencyAnalysis/Frequency.c
         Compress/CompressWord.c
         Encoding/Tree.c
-        Encoding/Tree.h
+        Tree.h
         Encoding/Encode.c
         Decoding/Decode.c)
