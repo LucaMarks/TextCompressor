@@ -7,6 +7,8 @@
 void insertionSort(CharacterCount **list);
 void assignBits(CharacterCount *characterCounts);
 char *getCode(char letter);
+void pad();
+char **getBits(char **line);
 
 int wordSize;
 CharacterCode *characterCodes_;
@@ -45,7 +47,16 @@ void convertToBytes(char word[], CharacterCount *characterCount, int wordSize_) 
 
     fclose(file);
 
+    //b4 we do decode runner
+    /*
+        Convert to bytes
+        pad the end
+     */
+    pad();
+
     decodeRunner(characterCodes_, ccIndex_);
+
+
     free(characterCodes_);
 
 }
@@ -73,5 +84,40 @@ void insertionSort(CharacterCount **list) {
     }
 }
 
+void pad() {
+    FILE *file = fopen("../compressedText.txt", "r");
+
+    char buff[255];
+
+    char *line;
+
+    while (fgets(buff, sizeof(buff), file) != NULL) {
+        //might be better to make the realloc instead
+        line = malloc(strlen(buff)+1);
+        line = buff;
+        //split to bits
+        // getBits(&line);
+        //# of 0 bits we need to add
+        // printf("Need to add %d bits\n", numBytes);
+    }
+
+    int numBytes = 8 - strlen(line) % 8;
+    // printf("%d % 8 = %d\n", strlen(line), numBytes);
 
 
+
+    FILE *writeFile = fopen("../compressedText.txt", "a");
+    // fprintf(writeFile, "%s", bits);
+    for (int i = 0; i < numBytes; i++) {
+        fprintf(writeFile, "0");
+        // printf("%c", bits[i]);
+    }
+
+
+    // printf("Made it here\n");
+    fclose(writeFile);
+
+    // fseek(read)
+    // fprintf()
+
+}

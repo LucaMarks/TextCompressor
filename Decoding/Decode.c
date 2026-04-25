@@ -8,7 +8,7 @@ char *getLetter(char *code, CharacterCode *characterCodes, int ccIndex);
 
 void decodeRunner(CharacterCode *characterCodes, int ccIndex) {
     //open file
-    FILE *file = fopen("../text.txt", "r");
+    FILE *file = fopen("../compressedText.txt", "r");
     char buffer[255];
 
     if (file == NULL) {
@@ -30,6 +30,15 @@ void decodeRunner(CharacterCode *characterCodes, int ccIndex) {
     }
     //need to loop through each char to get this right
     //otherwise we will have issues since lineCount var is 1 for this demo
+    //this will only run once for demo
+    //count represents how many characters we have per line
+    //  -> this will need to be refactored after demo
+    int count = 0;
+    for(int i = 0; i < lineCount; i++){
+        for (int j = 0; j < strlen(wordList[i]); j++) {
+            count++;
+        }
+    }
 
 
     //will also need to make a new characterCount array
@@ -44,10 +53,13 @@ void decodeRunner(CharacterCode *characterCodes, int ccIndex) {
     //assume every character code has the same # of bits
     int codeSize = sizeof(*(characterCodes[0].code));
     // printf("%d\n", codeSize);
-    // printf("%d\n", count);
-    for (int i = 0; i < lineCount; i+=codeSize+1) {
-        codes[currCodeIndex][0] = wordList[lineCount][0];
-        codes[currCodeIndex][1] = wordList[lineCount][1];
+    printf("%d\n", count);
+    //temp
+    int currLineCount = 0;
+    for (int i = 0; i < count-1; i+=codeSize+1) {
+        printf("%d, [%c, %c]\n", i, wordList[currLineCount][i], wordList[currLineCount][i+1]);
+        codes[currCodeIndex][0] = wordList[currLineCount][i];
+        codes[currCodeIndex][1] = wordList[currLineCount][i+1];
         currCodeIndex++;
 
     }
