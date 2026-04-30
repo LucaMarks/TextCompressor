@@ -36,7 +36,8 @@ void convertToBytes(char word[], CharacterCount *characterCount, int wordSize_) 
     }
 
     //write data to file
-    FILE *file = fopen("../compressedText.txt", "w");
+    //append mode
+    FILE *file = fopen("../CompressedText.txt", "a");
     // printf("%d\n", wordLen);
     for (int i = 0; i < strlen(word); i++) {
     //use a helper method to get the correct code, then add in the code

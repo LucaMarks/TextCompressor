@@ -10,7 +10,7 @@ void decodeRunner(TreeNode *headNode) {
     // printf("This runs!\n");
 
     FILE *file = fopen("../CompressedText.txt", "r");
-    FILE *decompressed = fopen("../DecompressedText.txt", "w");
+    FILE *decompressed = fopen("../DecompressedText.txt", "a");
 
     char buff[255];
     while (fgets(buff, sizeof(buff), file) != NULL) {

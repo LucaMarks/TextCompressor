@@ -9,49 +9,29 @@ int getRepeatingCharacters(char word[], CharacterCount **characterCount);
 int checkRepeatedCharacter(CharacterCount *characterCount, int size, char character);
 void cleanUpCharacterCount(CharacterCount **characterCount, int size);
 
-char *words[24];
+// char *words[24];
 
 int getCharacters() {
     //read the file
-    FILE *file = fopen("../text.txt", "r");
-    char buffer[1024] = {0};
-    if (file == NULL) {
-    printf("File not found!\n");
-    return 1;
-    }
+        char buffer[255];
+        char *currLine;
 
-    int count = 0;
-    while (fgets(buffer, sizeof(buffer), file)) {
-        buffer[strcspn(buffer, "\n")] = 0;
-        words[count] = strdup(buffer);
+        FILE *file = fopen("../text.txt", "r");
+        while (fgets(buffer, sizeof(buffer), file)) {
+            buffer[strcspn(buffer, "\n")] = 0;
+            CharacterCount *characterCount = malloc((strlen(buffer)+1) * sizeof(CharacterCount));
 
-        count++;
-    }
+            int size = getRepeatingCharacters(buffer, &characterCount);
+            // printf(" size is -> %d\n", size); works till here
 
-    for (int i = 0; i < count; i++) {
-        printf("%d\n", strlen(words[i]));
+            cleanUpCharacterCount(&characterCount, size);
+
+            convertToBytes(buffer, characterCount, size);
 
 
-        CharacterCount *characterCount = malloc((strlen(words[i]) +1) * sizeof(CharacterCount));
-
-        memset(characterCount, 0, sizeof(CharacterCount));
-
-        int size = getRepeatingCharacters(words[i], &characterCount);
-
-        cleanUpCharacterCount(&characterCount, size);
-        //clean up characterCount
-        // printf("here\n");
-        // CharacterCount *temp = realloc(characterCount, size * sizeof(CharacterCount));
-        // characterCount = temp;
-
-        convertToBytes(words[i], characterCount, size);
-
-        free(characterCount);
-    }
-
-
-    fclose(file);
-
+            free(characterCount);
+        }
+        fclose(file);
 }
 void cleanUpCharacterCount(CharacterCount **characterCount, int size) {
 
