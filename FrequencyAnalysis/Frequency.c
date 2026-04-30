@@ -30,6 +30,7 @@ int getCharacters() {
 
 
             free(characterCount);
+
         }
         fclose(file);
 }
