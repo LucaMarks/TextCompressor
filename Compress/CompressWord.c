@@ -62,7 +62,7 @@ void convertToBytes(char word[], CharacterCount *characterCount, int wordSize_) 
     fclose(file_);
     // printf("This runs!");
     // free(characterCodes_);
-    // decodeRunner(headNode);
+    decodeRunner(headNode);
 
 
 
