@@ -14,10 +14,19 @@ void decodeRunner(TreeNode *headNode) {
 
     char buff[255];
     while (fgets(buff, sizeof(buff), file) != NULL) {
-        // printf("strlen _> %d", strlen(buff));
-        char *convertedLine = convertLine(headNode, buff);
-        // printf("%s\n", convertedLine);
-        fprintf(decompressed, "%s", convertedLine);
+        // printf("Converting [%s]\n", buff);
+        // printf("strlen _> %d\n", strlen(buff));
+        //remove the \n at the end of each line
+        int len = strlen(buff);
+        char *newBuff = malloc(len-1);
+        for (int i = 0; i < len -1; i++) {
+            newBuff[i] = buff[i];
+        }
+        // printf("newbuff -> [%s]\n", newBuff);
+        char *convertedLine = convertLine(headNode, newBuff);
+        printf("%s\n\n", convertedLine);
+        fprintf(decompressed, "%s\n", convertedLine);
+        free(newBuff);
     }
     fclose(file);
     fclose(decompressed);
@@ -30,7 +39,7 @@ char *convertLine(TreeNode *headNode, char *line) {
     TreeNode *currNode = headNode;
 
     // printf("strlen -> %d", strlen((line)));
-    for (int i = 0; i < strlen(line); i++) {
+    for (int i = 0; i < strlen(line)+1; i++) {
         // printf("this Runs!\n");
         if (line != NULL) {
             // printf("%c", line[i]);
@@ -39,8 +48,14 @@ char *convertLine(TreeNode *headNode, char *line) {
                 printf("Letter %c found!\n", sentence[sentenceIndex-1]);
                 currNode = headNode;
                 }
-            if (line[i] == '0') {currNode = currNode->left;}
-            if (line[i] == '1') {currNode = currNode->right;}
+            if (line[i] == '0') {
+                currNode = currNode->left;
+                // printf("0\n");
+            }
+            if (line[i] == '1') {
+                currNode = currNode->right;
+                // printf("1\n");
+            }
 
         }else{printf("Error! line index %d is null for given line (Decode.c 10)\n");return NULL;}
     }

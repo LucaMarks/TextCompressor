@@ -55,7 +55,9 @@ void convertToBytes(char word[], CharacterCount *characterCount, int wordSize_) 
         pad the end
      */
 
-    pad();
+    //can't lie i don't really understand why Ineed to pad it
+    //it just breaks my code
+    // pad();
 
     FILE *file_ = fopen("../CompressedText.txt", "a");
     fprintf(file_, "\n");
