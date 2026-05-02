@@ -31,12 +31,15 @@ void convertToBytes(char word[], CharacterCount *characterCount, int wordSize_) 
     characterCodes_ = *getCharacterCodes();
     ccIndex_ = *getCharacterCodeLen();
 
+    // printf("%d\n", ccIndex_);
     for (int i = 0; i < ccIndex_; i++) {
         printf("[%s %c]\n", characterCodes_[i].code, characterCodes_[i].letter);
     }
+    // free(characterCodes_);
 
     //write data to file
-    FILE *file = fopen("../compressedText.txt", "w");
+    //append mode
+    FILE *file = fopen("../CompressedText.txt", "a");
     // printf("%d\n", wordLen);
     for (int i = 0; i < strlen(word); i++) {
     //use a helper method to get the correct code, then add in the code
@@ -44,7 +47,7 @@ void convertToBytes(char word[], CharacterCount *characterCount, int wordSize_) 
     fprintf(file, "%s", code);
     // fprintf(file)
     }
-
+    // fprintf(file, "\n");
     fclose(file);
 
     //b4 we do decode runner
@@ -53,10 +56,14 @@ void convertToBytes(char word[], CharacterCount *characterCount, int wordSize_) 
         pad the end
      */
 
-    pad();
+    //can't lie i don't really understand why Ineed to pad it
+    //it just breaks my code
+    // pad();
 
+    FILE *file_ = fopen("../CompressedText.txt", "a");
+    fprintf(file_, "\n");
+    fclose(file_);
     // printf("This runs!");
-
     // free(characterCodes_);
     decodeRunner(headNode);
 
@@ -103,6 +110,7 @@ void pad() {
         //# of 0 bits we need to add
         // printf("Need to add %d bits\n", numBytes);
     }
+    fclose(file);
 
     int numBytes = 8 - strlen(line) % 8;
     // printf("%d % 8 = %d\n", strlen(line), numBytes);

@@ -19,7 +19,13 @@ int *getCharacterCodeLen() {
 }
 
 TreeNode *encodeRunner(CharacterCount *characterCount, char word[], int size) {
-    int leafNodes = sizeof(*characterCount) / sizeof(CharacterCount);
+    if (characterCodes != NULL) {
+        free(characterCodes);
+    }
+    ccIndex = 0;
+    int leafNodes = size;
+    // int leafNodes = sizeof(*characterCount) / sizeof(CharacterCount);
+    // printf("Leaf nodes -> %d\n", leafNodes);
     characterCodes = malloc( ((2 * leafNodes) - 1) * sizeof(CharacterCode));
     // printf("Made it here!\n");
     TreeNode *head = malloc(sizeof(TreeNode));

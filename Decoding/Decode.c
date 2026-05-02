@@ -5,20 +5,39 @@
 
 void decodeRunner(TreeNode *headNode);
 char *convertLine(TreeNode *headNode, char *line);
+//global var
+int currLine = 0;
 
 void decodeRunner(TreeNode *headNode) {
+    currLine++;
     // printf("This runs!\n");
 
     FILE *file = fopen("../CompressedText.txt", "r");
-    FILE *decompressed = fopen("../DecompressedText.txt", "w");
+    FILE *decompressed = fopen("../DecompressedText.txt", "a");
 
-    char buff[255];
-    while (fgets(buff, sizeof(buff), file) != NULL) {
-        // printf("strlen _> %d", strlen(buff));
-        char *convertedLine = convertLine(headNode, buff);
-        // printf("%s\n", convertedLine);
-        fprintf(decompressed, "%s", convertedLine);
+    char line[255];
+    //get to the right line
+    for (int i = 0; i < currLine; i++){
+        fgets(line, sizeof(line), file);
     }
+    int len = strlen(line);
+    // printf("%d\n", len);
+    char *newLine = malloc(len -1);
+    int i = 0;
+    for (i = 0; i < len-1; i++) {
+        newLine[i] = line[i];
+    }
+    newLine[i] = '\0';
+    printf("new line -> %s\n", newLine);
+
+    char *convertedLine = convertLine(headNode, newLine);
+    printf("%s\n\n", convertedLine);
+    //write line if it's correct
+    fprintf(decompressed, "%s\n", convertedLine);
+
+    free(newLine);
+    free(convertedLine);
+
     fclose(file);
     fclose(decompressed);
 }
@@ -30,7 +49,7 @@ char *convertLine(TreeNode *headNode, char *line) {
     TreeNode *currNode = headNode;
 
     // printf("strlen -> %d", strlen((line)));
-    for (int i = 0; i < strlen(line); i++) {
+    for (int i = 0; i < strlen(line)+1; i++) {
         // printf("this Runs!\n");
         if (line != NULL) {
             // printf("%c", line[i]);
@@ -39,8 +58,14 @@ char *convertLine(TreeNode *headNode, char *line) {
                 printf("Letter %c found!\n", sentence[sentenceIndex-1]);
                 currNode = headNode;
                 }
-            if (line[i] == '0') {currNode = currNode->left;}
-            if (line[i] == '1') {currNode = currNode->right;}
+            if (line[i] == '0') {
+                currNode = currNode->left;
+                // printf("0\n");
+            }
+            if (line[i] == '1') {
+                currNode = currNode->right;
+                // printf("1\n");
+            }
 
         }else{printf("Error! line index %d is null for given line (Decode.c 10)\n");return NULL;}
     }
