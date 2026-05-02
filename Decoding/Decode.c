@@ -21,10 +21,13 @@ void decodeRunner(TreeNode *headNode) {
         fgets(line, sizeof(line), file);
     }
     int len = strlen(line);
+    // printf("%d\n", len);
     char *newLine = malloc(len -1);
-    for (int i = 0; i < len-1; i++) {
+    int i = 0;
+    for (i = 0; i < len-1; i++) {
         newLine[i] = line[i];
     }
+    newLine[i] = '\0';
     printf("new line -> %s\n", newLine);
 
     char *convertedLine = convertLine(headNode, newLine);

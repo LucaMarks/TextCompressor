@@ -19,6 +19,9 @@ int *getCharacterCodeLen() {
 }
 
 TreeNode *encodeRunner(CharacterCount *characterCount, char word[], int size) {
+    if (characterCodes != NULL) {
+        free(characterCodes);
+    }
     ccIndex = 0;
     int leafNodes = size;
     // int leafNodes = sizeof(*characterCount) / sizeof(CharacterCount);

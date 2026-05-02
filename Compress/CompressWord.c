@@ -35,6 +35,7 @@ void convertToBytes(char word[], CharacterCount *characterCount, int wordSize_) 
     for (int i = 0; i < ccIndex_; i++) {
         printf("[%s %c]\n", characterCodes_[i].code, characterCodes_[i].letter);
     }
+    // free(characterCodes_);
 
     //write data to file
     //append mode
