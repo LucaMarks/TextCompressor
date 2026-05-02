@@ -5,29 +5,36 @@
 
 void decodeRunner(TreeNode *headNode);
 char *convertLine(TreeNode *headNode, char *line);
+//global var
+int currLine = 0;
 
 void decodeRunner(TreeNode *headNode) {
+    currLine++;
     // printf("This runs!\n");
 
     FILE *file = fopen("../CompressedText.txt", "r");
     FILE *decompressed = fopen("../DecompressedText.txt", "a");
 
-    char buff[255];
-    while (fgets(buff, sizeof(buff), file) != NULL) {
-        // printf("Converting [%s]\n", buff);
-        // printf("strlen _> %d\n", strlen(buff));
-        //remove the \n at the end of each line
-        int len = strlen(buff);
-        char *newBuff = malloc(len-1);
-        for (int i = 0; i < len -1; i++) {
-            newBuff[i] = buff[i];
-        }
-        // printf("newbuff -> [%s]\n", newBuff);
-        char *convertedLine = convertLine(headNode, newBuff);
-        printf("%s\n\n", convertedLine);
-        fprintf(decompressed, "%s\n", convertedLine);
-        free(newBuff);
+    char line[255];
+    //get to the right line
+    for (int i = 0; i < currLine; i++){
+        fgets(line, sizeof(line), file);
     }
+    int len = strlen(line);
+    char *newLine = malloc(len -1);
+    for (int i = 0; i < len-1; i++) {
+        newLine[i] = line[i];
+    }
+    printf("new line -> %s\n", newLine);
+
+    char *convertedLine = convertLine(headNode, newLine);
+    printf("%s\n\n", convertedLine);
+    //write line if it's correct
+    fprintf(decompressed, "%s\n", convertedLine);
+
+    free(newLine);
+    free(convertedLine);
+
     fclose(file);
     fclose(decompressed);
 }
